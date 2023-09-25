@@ -5,6 +5,7 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>train-member</module>
+		<module>train-common</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -43,6 +44,11 @@
 				<version>5.6.3</version>
 			</dependency>
 
+			<dependency>
+				<groupId>com.benno</groupId>
+				<artifactId>train-common</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
