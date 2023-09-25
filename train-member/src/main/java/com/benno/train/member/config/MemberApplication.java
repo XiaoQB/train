@@ -18,7 +18,7 @@ public class MemberApplication {
 		SpringApplication app = new SpringApplication(MemberApplication.class);
 		Environment env = app.run(args).getEnvironment();
 		LOG.info("start success!");
-		LOG.info("test address: \thttp://127.0.0.1:{}/hello", env.getProperty("server.port"));
+		LOG.info("test address: \thttp://127.0.0.1:{}{}/hello", env.getProperty("server.port"),env.getProperty("server.servlet.context-path"));
 	}
 
 }
