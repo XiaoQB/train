@@ -1,5 +1,7 @@
 package com.benno.train.member.controller;
 
+import com.benno.train.common.resp.CommonResp;
+import com.benno.train.member.req.MemberRegisterReq;
 import com.benno.train.member.service.MemberService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +17,16 @@ public class MemberController {
     MemberService memberService;
 
     @GetMapping("/count")
-    public Integer count() {
-        return memberService.count();
+    public CommonResp<Integer> count() {
+        int count = memberService.count();
+        CommonResp<Integer> resp = new CommonResp<>();
+        resp.setContent(count);
+        return resp;
     }
 
     @PostMapping("/register")
-    public long register(String mobile) {
-        return memberService.register(mobile);
+    public CommonResp<Long> register(MemberRegisterReq req) {
+        long register = memberService.register(req);
+        return new CommonResp<>(register);
     }
 }
