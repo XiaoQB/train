@@ -1,6 +1,8 @@
 package com.benno.train.member.service;
 
 import cn.hutool.core.collection.CollUtil;
+import com.benno.train.common.exception.BusinessException;
+import com.benno.train.common.exception.BusinessExceptionEnum;
 import com.benno.train.member.domain.Member;
 import com.benno.train.member.domain.MemberExample;
 import com.benno.train.member.mapper.MemberMapper;
@@ -26,7 +28,7 @@ public class MemberService {
         memberExample.createCriteria().andMobileEqualTo(mobile);
         List<Member> members = memberMapper.selectByExample(memberExample);
         if (CollUtil.isNotEmpty(members)) {
-            throw new RuntimeException("the number is already registered!");
+            throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
 
         Member member = new Member();

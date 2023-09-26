@@ -1,6 +1,7 @@
 package com.benno.train.common.controller;
 
 
+import com.benno.train.common.exception.BusinessException;
 import com.benno.train.common.resp.CommonResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,19 +18,32 @@ public class ControllerExceptionHandler {
     private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     /**
-     * 所有异常统一处理
+     * 系统异常统一处理
      * @param e
      * @return
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public CommonResp exceptionHandler(Exception e) throws Exception {
+    public CommonResp exceptionHandler(Exception e) {
         CommonResp commonResp = new CommonResp();
-        LOG.error("系统异常：", e);
+        LOG.error("System exception：", e);
         commonResp.setSuccess(false);
-        // commonResp.setMessage("系统出现异常，请联系管理员");
-        commonResp.setMessage(e.getMessage());
+         commonResp.setMessage("System exception occur, plz contact system admin");
         return commonResp;
     }
 
+    /**
+     * 业务异常统一处理
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseBody
+    public CommonResp exceptionHandler(BusinessException e) {
+        CommonResp commonResp = new CommonResp();
+        LOG.error("Business exception：{}", e.getE().getDesc());
+        commonResp.setSuccess(false);
+        commonResp.setMessage(e.getE().getDesc());
+        return commonResp;
+    }
 }
