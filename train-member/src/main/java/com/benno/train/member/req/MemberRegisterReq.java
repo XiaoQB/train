@@ -1,7 +1,10 @@
 package com.benno.train.member.req;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class MemberRegisterReq {
 
+    @NotBlank(message = "[mobile number] can not be empty")
     private String mobile;
 
     public String getMobile() {
